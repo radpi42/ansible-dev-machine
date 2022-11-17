@@ -6,7 +6,7 @@
       ansible.builtin.authorized_key:
         user: radpivm
         state: present
-        key: "{{ lookup('file', '/home/$USER/ssh-keys/public_keys') }}"
+        key: "{{ lookup('file', '/home/radpivm/ansible/ssh-keys/public_keys') }}"
       
     - name: disbale the need for a password to use sudo     
       become: true
