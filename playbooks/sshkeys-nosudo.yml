@@ -1,0 +1,24 @@
+---
+- name: install public keys for ssh
+   hosts: "*"
+    tasks:
+      - name: set authorized keys
+        ansible.builtin.authorized_key:
+          user: radpivm
+          state: present
+          key: "{{ lookup('file', '/home/$USER/ssh-keys/public_keys') }}"
+      
+      - name: disbale the need for a password to use sudo     
+        become: true
+        ansible.builtin.lineinfile:
+          path: /etc/sudoers
+          state: present
+          regexp: '^%sudo'
+          line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+          validate: /usr/sbin/visudo -cf %s
+          
+          
+
+          
+   
+    

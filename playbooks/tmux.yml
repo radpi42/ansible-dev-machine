@@ -1,0 +1,9 @@
+- name: install latest tmux
+  hosts: "*"
+  tasks:
+    - name: install tmux
+      apt:
+        name: tmux
+        state: present
+        update_cache: true
+      become: true

@@ -1,0 +1,14 @@
+---
+
+- name: install latest git
+  hosts: "*"
+  tasks:
+    - name: install git
+      apt:
+        name: git
+        state: present
+        update_cache: true
+      become: true
+
+
+...

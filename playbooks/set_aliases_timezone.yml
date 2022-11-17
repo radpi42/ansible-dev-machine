@@ -1,0 +1,14 @@
+---
+
+- name: set timezone and aliases 
+  hosts: "*"
+    tasks:
+    - name: set timezone
+      become: yes
+      shell: timedatectl set-timezone America/Los_Angeles
+    
+    - name: copy bash aliases
+      template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
+
+
+...

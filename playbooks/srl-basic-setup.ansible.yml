@@ -1,0 +1,72 @@
+---
+- name: initial update and installs
+  hosts: "*"
+  become: true
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: yes
+        upgrade: 'yes'
+    
+    - name: install qemu-guest-agent
+      apt:
+        name: qemu-guest-agent
+        state: present
+        update_cache: true
+      
+    - name: install tmux
+      apt:
+        name: tmux
+        state: present
+        update_cache: true
+
+    - name: install curl
+      apt:
+        name: curl
+        state: present
+        update_cache: true
+
+    - name: install git
+      apt:
+        name: git
+        state: present
+        update_cache: true
+
+    - name: install nfs-common
+      apt:
+        name: nfs-common
+        state: present
+        update_cache: true
+
+    - name: install nano
+      apt:
+        name: nano
+        state: present
+        update_cache: true
+
+    - name: install python3-pip
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: true
+
+# play 2
+- name: set timezone and aliases
+  hosts: "*"
+  become: true
+  tasks:
+    - name: set timezone
+      shell: timedatectl set-timezone America/Los_Angeles
+    
+    - name: copy bash aliases
+      template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
+
+# play 3
+- name: install docker on ubuntu
+  hosts: "*"
+  become: true
+  tasks:
+    - name: run docker install script
+      script: ../scripts/install-docker-ubuntu.sh
+
+...

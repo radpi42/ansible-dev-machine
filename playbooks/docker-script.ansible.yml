@@ -1,0 +1,6 @@
+- name: install docker on ubuntu
+  hosts: "*"
+  become: true
+  tasks:
+    - name: run docker install script
+      script: ../scripts/install-docker-ubuntu.sh
