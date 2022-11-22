@@ -1,0 +1,6 @@
+- name: install tailscale on linux
+  hosts: "*"
+  become: true
+  tasks:
+    - name: run tailscale install script
+      script: ../scripts/install-tailscale.sh
