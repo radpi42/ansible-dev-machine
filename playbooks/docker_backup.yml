@@ -1,0 +1,24 @@
+---
+
+# Version 1.1.0
+
+- hosts: "{{ HOSTS | default('all') }}"
+  vars:
+    backup_location: "home/ubuntu/docker/backup/"
+    backup_retention: 14
+    delete_old_backups: true
+    container_list_to_backup:
+      - container_name: wallabag
+      - container_name: server-turtl-server-1
+      - container_name: server-postgres-db-1
+      - container_name: myshaarli
+      - container_name: wallabag-db
+
+  tasks:
+    - name: Backup Container
+      include_tasks: do_backup.yml
+      loop: "{{ container_list_to_backup }}"
+
+    - name: Delete Backup older than {{ backup_retention }} days
+      include_tasks: delete_backup.yml
+      when: delete_old_backups
