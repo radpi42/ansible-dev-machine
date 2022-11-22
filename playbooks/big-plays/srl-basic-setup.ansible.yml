@@ -59,7 +59,7 @@
       shell: timedatectl set-timezone America/Los_Angeles
     
     - name: copy bash aliases
-      template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
+      template: src=~/ansible-dev-machine/templates/bash_aliases dest=/home/radpivm/.bash_aliases
 
 # play 3
 - name: install docker on ubuntu
@@ -67,6 +67,6 @@
   become: true
   tasks:
     - name: run docker install script
-      script: ../scripts/install-docker-ubuntu.sh
+      script: ~/ansible-dev-machine/scripts/install-docker-ubuntu.sh
 
 ...
