@@ -12,7 +12,7 @@
       - container_name: server-turtl-server-1
       - container_name: server-postgres-db-1
       - container_name: myshaarli
-      - container_name: wallabag-db
+      - container_name: a806d838d86a
 
   tasks:
     - name: Backup Container
