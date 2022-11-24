@@ -1,14 +1,13 @@
 ---
-
-- name: set timezone and aliases 
+- name: Set timezone and aliases
   hosts: "*"
-    tasks:
-    - name: set timezone
-      become: yes
-      shell: timedatectl set-timezone America/Los_Angeles
-    
-    - name: copy bash aliases
-      template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
+  tasks:
+    - name: Set timezone
+      become: true
+      ansible.builtin.timezone: timedatectl set-timezone America/Los_Angeles
 
-
+    - name: Copy bash aliases
+      ansible.builtin.template: 
+        src: ../templates/bash_aliases 
+        dest: /home/radpivm/.bash_aliases
 ...

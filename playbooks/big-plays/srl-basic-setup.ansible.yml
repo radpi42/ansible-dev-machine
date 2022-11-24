@@ -1,72 +1,71 @@
 ---
-- name: initial update and installs
+- name: Initial update and installs
   hosts: "*"
   become: true
   tasks:
-    - name: apt update
+    - name: Apt update
       apt:
-        update_cache: yes
+        update_cache: true
         upgrade: 'yes'
-    
-    - name: install qemu-guest-agent
+  
+    - name: Install qemu-guest-agent
       apt:
         name: qemu-guest-agent
         state: present
         update_cache: true
-      
-    - name: install tmux
+    
+    - name: Install tmux
       apt:
         name: tmux
         state: present
         update_cache: true
 
-    - name: install curl
+    - name: Install curl
       apt:
         name: curl
         state: present
         update_cache: true
 
-    - name: install git
+    - name: Install git
       apt:
         name: git
         state: present
         update_cache: true
 
-    - name: install nfs-common
+    - name: Install nfs-common
       apt:
         name: nfs-common
         state: present
         update_cache: true
 
-    - name: install nano
+    - name: Install nano
       apt:
         name: nano
         state: present
         update_cache: true
 
-    - name: install python3-pip
+    - name: Install python3-pip
       apt:
         name: python3-pip
         state: present
         update_cache: true
 
 # play 2
-- name: set timezone and aliases
+- name: Set timezone and aliases
   hosts: "*"
   become: true
   tasks:
-    - name: set timezone
-      shell: timedatectl set-timezone America/Los_Angeles
-    
-    - name: copy bash aliases
-      template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
+    - name: Set timezone
+      ansible.builtin.shell: timedatectl set-timezone America/Los_Angeles
+    - name: Copy bash aliases
+      ansible.builtin.template: src=../templates/bash_aliases dest=/home/radpivm/.bash_aliases
 
 # play 3
-- name: install docker on ubuntu
+- name: Install docker on ubuntu
   hosts: "*"
   become: true
   tasks:
-    - name: run docker install script
-      script: ../scripts/install-docker-ubuntu.sh
+    - name: Run docker install script
+      ansible.builtin.script: scripts/install-docker-ubuntu.sh
 
 ...
