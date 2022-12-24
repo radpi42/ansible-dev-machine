@@ -1,0 +1,9 @@
+---
+- name: Set timezone and aliases
+  hosts: "*"
+  tasks:
+    - name: Copy bash aliases
+      ansible.builtin.template: 
+        src: ../templates/bash_aliases 
+        dest: /home/radpivm/.bash_aliases
+...
